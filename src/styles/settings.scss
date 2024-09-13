@@ -1,0 +1,4 @@
+@use 'vuetify/settings' with (
+  // $button-font-size: tools.map-deep-get(settings.$typography, 'button', 'size'),
+  $button-height: 36px
+);

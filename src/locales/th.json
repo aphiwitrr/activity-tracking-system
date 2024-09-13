@@ -1,0 +1,54 @@
+{
+    "username": "ชื่อผู้ใช้",
+    "email": "อีเมล",
+    "password": "รหัสผ่าน",
+    "login": "เข้าสู่ระบบ",
+    "register": "ลงทะเบียน",
+    "forgetPassword": "ลืมรหัสผ่าน ?",
+    "home": "หน้าหลัก",
+    "news": "ข่าวสาร",
+    "curriculums": "หลักสูตร",
+    "contact": "ติดต่อ",
+    "data center": "ศูนย์ข้อมูล",
+    "profile": "โปรไฟล์",
+    "logout": "ออกสู่ระบบ",
+    "search": "ค้นหา",
+    "manage": "จัดการ",
+    "management": "การจัดการ",
+    "subject": "รายวิชา",
+    "skill": "ทักษะ",
+    "user": "ผู้ใช้งาน",
+    "add": "เพิ่ม",
+    "branch": "สาขา",
+    "faculty": "คณะ",
+    "actions": "ดำเนินการ",
+    "list user": "รายชื่อผู้ใช้งาน",
+    "uid": "รหัสผู้ใช้",
+    "first name": "ชื่อจริง",
+    "last name": "นามสกุล",
+    "position": "ตำแหน่ง",
+    "$vuetify": {
+        "noDataText": "ไม่มีข้อมูล",
+        "dataFooter": {
+            "itemsPerPageText": "รายการต่อหน้า:",
+            "itemsPerPageAll": "ทั้งหมด",
+            "nextPage": "หน้าต่อไป",
+            "prevPage": "หน้าที่แล้ว",
+            "firstPage": "หน้าแรก",
+            "lastPage": "หน้าสุดท้าย",
+            "pageText": "{0}-{1} จาก {2}"
+        },
+        "carousel": {
+            "prev": "ก่อนหน้า",
+            "next": "ต่อไป",
+            "ariaLabel": {
+                "delimiter": "ตัวคั่น"
+            }
+        },
+        "input": {
+            "clear": "ล้าง"
+        },
+        "open": "เปิด",
+        "close": "ปิด"
+    }
+}
