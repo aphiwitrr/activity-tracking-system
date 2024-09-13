@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { useSubjectStore } from '@/stores/subject';
-import { useUserStore } from '@/stores/user';
-import type { Subject } from '@/types/Subjects';
-import type { User } from '@/types/User';
-import { computed, nextTick, onMounted, ref } from 'vue';
-import type { VForm } from 'vuetify/components';
+import { useSubjectStore } from '@/stores/subject'
+import { useUserStore } from '@/stores/user'
+import type { Subject } from '@/types/Subjects'
+import type { User } from '@/types/User'
+import { computed, nextTick, onMounted, ref } from 'vue'
+import type { VForm } from 'vuetify/components'
 import type { PageParams, SortItem } from '@/types/PageParams'
 import FormDialog from '@/views/subjects/SubjectFormDialog.vue'
-import SearchData from '@/components/SearchData.vue'
+import SearchTextfield from '@/components/table/SearchTextfield.vue'
 import AddButton from '@/components/AddButton.vue'
 const subjects = computed(() => subjectStore.subjects)
 const subjectStore = useSubjectStore()
@@ -19,45 +19,44 @@ const loading = ref(false)
 const isUpdate = ref(false)
 const isCreate = ref(false)
 onMounted(async () => {
-    fetchSubjects()
-    console.log(subjectStore.totalSubjects)
+  fetchSubjects()
+  console.log(subjectStore.totalSubjects)
 })
 const headers = [
-    { title: 'รหัสรายวิชา', key: 'id', value: 'id' },
-    { title: 'ชื่อรายวิชา', key: 'thaiName', value: 'thaiName' },
-    { title: 'ชื่อรายวิชาภาษาอังกฤษ', key: 'engName', value: 'engName' },
-    { title: 'จำนวนหน่วยกิต', key: 'credit', value: 'credit' },
-    { title: 'จำนวนเวลาเรียน', key: 'studyTime', value: 'studyTime' }
+  { title: 'รหัสรายวิชา', key: 'id', value: 'id' },
+  { title: 'ชื่อรายวิชา', key: 'thaiName', value: 'thaiName' },
+  { title: 'ชื่อรายวิชาภาษาอังกฤษ', key: 'engName', value: 'engName' },
+  { title: 'จำนวนหน่วยกิต', key: 'credit', value: 'credit' },
+  { title: 'จำนวนเวลาเรียน', key: 'studyTime', value: 'studyTime' }
 ]
 const fetchSubjects = async (search?: string) => {
-    loading.value = true
-    if (search) {
-        pageParams.value.search = search
-        console.log(pageParams.value.search)
-    } else {
-        pageParams.value.search = ''
-    }
+  loading.value = true
+  if (search) {
+    pageParams.value.search = search
     console.log(pageParams.value.search)
-    try {
-        await subjectStore.fetchSubjectsPage(pageParams.value)
-    } catch (error) {
-        console.error('Error fetching subjects:', error)
-    } finally {
-        loading.value = false
-    }
-    // loading.value = true
-    // try {
-    //     await subjectStore.fetchSubjects(pageParams.value)
-    // } catch (error) {
-    //     console.error('Error fetching users:', error)
-    // } finally {
-    //     loading.value = false
-    // }
-
+  } else {
+    pageParams.value.search = ''
+  }
+  console.log(pageParams.value.search)
+  try {
+    await subjectStore.fetchSubjectsPage(pageParams.value)
+  } catch (error) {
+    console.error('Error fetching subjects:', error)
+  } finally {
+    loading.value = false
+  }
+  // loading.value = true
+  // try {
+  //     await subjectStore.fetchSubjects(pageParams.value)
+  // } catch (error) {
+  //     console.error('Error fetching users:', error)
+  // } finally {
+  //     loading.value = false
+  // }
 }
 const addSubject = () => {
-    isCreate.value = true
-    dialog.value = true
+  isCreate.value = true
+  dialog.value = true
 }
 
 // async function save() {
@@ -69,17 +68,17 @@ const addSubject = () => {
 //     await subjectStore.saveSubject(pageParams.value)
 // }
 const save = async (subject: Subject) => {
-    subjectStore.editedSubject = subject
-    if (isUpdate.value) {
-        await subjectStore.updateSubject()
-    } else {
-        await subjectStore.saveSubject()
-    }
-    isUpdate.value = false
-    subjectStore.clearForm()
-    fetchSubjects()
-    closeDialog()
-    dialog.value = false
+  subjectStore.editedSubject = subject
+  if (isUpdate.value) {
+    await subjectStore.updateSubject()
+  } else {
+    await subjectStore.saveSubject()
+  }
+  isUpdate.value = false
+  subjectStore.clearForm()
+  fetchSubjects()
+  closeDialog()
+  dialog.value = false
 }
 // function closeDialog() {
 //     dialog.value = false
@@ -88,11 +87,11 @@ const save = async (subject: Subject) => {
 //     })
 // }
 const closeDialog = () => {
-    subjectStore.clearForm()
-    editedSubject.value = Object.assign({}, subjectStore.initialSubject)
-    dialog.value = false
-    isCreate.value = false
-    isUpdate.value = false
+  subjectStore.clearForm()
+  editedSubject.value = Object.assign({}, subjectStore.initialSubject)
+  dialog.value = false
+  isCreate.value = false
+  isUpdate.value = false
 }
 // const editItem = async (subject: Subject) => {
 //     console.log(subject)
@@ -104,112 +103,132 @@ const closeDialog = () => {
 //     }
 // }
 const editItem = (subject: Subject) => {
-    editedSubject.value = { ...subject } // work with a temporary copy of editedUser.value *******************
+  editedSubject.value = { ...subject } // work with a temporary copy of editedUser.value *******************
 
-    if (editedSubject.value.id) {
-        isUpdate.value = true
-        dialog.value = true
-    }
+  if (editedSubject.value.id) {
+    isUpdate.value = true
+    dialog.value = true
+  }
 }
 async function deleteItem(subject: Subject) {
-    console.log(subject)
-    await subjectStore.fetchSubject(subject.id)
-    dialogDelete.value = true
-    // editedIndex = -1
+  console.log(subject)
+  await subjectStore.fetchSubject(subject.id)
+  dialogDelete.value = true
+  // editedIndex = -1
 }
 function closeDelete() {
-    dialogDelete.value = false
-    nextTick(() => {
-        subjectStore.clearForm()
-    })
+  dialogDelete.value = false
+  nextTick(() => {
+    subjectStore.clearForm()
+  })
 }
 
 async function deleteItemConfirm() {
-    await subjectStore.deleteSubject(pageParams.value)
-    closeDelete()
+  await subjectStore.deleteSubject(pageParams.value)
+  closeDelete()
 }
 const pageParams = ref<PageParams>({
-    page: 1,
-    limit: 10,
-    sort: '',
-    order: 'ASC',
-    search: ''
+  page: 1,
+  limit: 10,
+  sort: '',
+  order: 'ASC',
+  search: ''
 })
 const sortBy = ref<SortItem[]>([{ key: 'id', order: 'asc' }])
 
-
 const updateOptions = (options: any) => {
-    //sorting
-    if (options.sortBy.length === 0) {
-        // Set default sort when sortBy is empty
-        sortBy.value = [{ key: 'id', order: 'asc' }]
-    } else {
-        // Update sortBy and sortDesc based on user selection
-        sortBy.value = options.sortBy
-    }
-    // toUpperCase
-    pageParams.value.sort = sortBy.value[0].key
-    if (sortBy.value[0].order === 'desc') {
-        pageParams.value.order = 'DESC'
-    } else {
-        pageParams.value.order = 'ASC'
-    }
+  //sorting
+  if (options.sortBy.length === 0) {
+    // Set default sort when sortBy is empty
+    sortBy.value = [{ key: 'id', order: 'asc' }]
+  } else {
+    // Update sortBy and sortDesc based on user selection
+    sortBy.value = options.sortBy
+  }
+  // toUpperCase
+  pageParams.value.sort = sortBy.value[0].key
+  if (sortBy.value[0].order === 'desc') {
+    pageParams.value.order = 'DESC'
+  } else {
+    pageParams.value.order = 'ASC'
+  }
 
-    // current page
-    pageParams.value.page = options.page
-    // item per page
-    pageParams.value.limit = options.itemsPerPage
-    // fetchSubject
-    fetchSubjects()
+  // current page
+  pageParams.value.page = options.page
+  // item per page
+  pageParams.value.limit = options.itemsPerPage
+  // fetchSubject
+  fetchSubjects()
 }
 </script>
 <template>
-    <v-container fluid>
-        <h2 style="font-size: 24px" class="pa-5">รายวิชา</h2>
+  <v-container fluid>
+    <h2 style="font-size: 24px" class="pa-5">รายวิชา</h2>
 
-        <v-row class="d-flex justify-end ga-5" no-gutters>
-            <v-col class="d-flex justify-end flex-grow-1">
-                <SearchData style="min-width: 250px" :label="'ค้นหารายวิชา'" :search="pageParams.search"
-                    :fetch-data="fetchSubjects"></SearchData>
-            </v-col>
-            <v-col class="d-flex justify-end flex-grow-0">
-                <!-- <AddButton style="width: 300px" :to-link="null" :label="'เพิ่มรายวิชา'" to="/AddSubject">
+    <v-row class="d-flex justify-end ga-5" no-gutters>
+      <v-col class="d-flex justify-end flex-grow-1">
+        <SearchData
+          style="min-width: 250px"
+          :label="'ค้นหารายวิชา'"
+          :search="pageParams.search"
+          :fetch-data="fetchSubjects"
+        ></SearchData>
+      </v-col>
+      <v-col class="d-flex justify-end flex-grow-0">
+        <!-- <AddButton style="width: 300px" :to-link="null" :label="'เพิ่มรายวิชา'" to="/AddSubject">
                 </AddButton> -->
-                <AddButton style="width: 300px" :to-link="null" :label="'เพิ่มรายวิชา'" :clickFucntion="addSubject">
-                </AddButton>
-            </v-col>
-        </v-row>
-        <v-row no-gutters>
-            <v-col>
-                <v-card class="mt-4">
-                    <div>
-                        <v-data-table-server v-model:items-per-page="pageParams.limit" :headers="headers"
-                            :items="subjectStore.subjects" :items-length="subjectStore.totalSubjects" :loading="loading"
-                            item-value="id" class="bg-primary" @update:options="updateOptions">
-
-                            <template v-slot:item="{ item, index }">
-                                <tr :class="[{ 'even-row': index % 2 === 0, 'odd-row': index % 2 !== 0 }]">
-                                    <td style="min-width: 130px">{{ item.id }}</td>
-                                    <td style="min-width: 220px">{{ item.thaiName }}</td>
-                                    <td style="min-width: 220px">{{ item.engName }}</td>
-                                    <td style="min-width: 180px">{{ item.credit }}</td>
-                                    <td style="min-width: 180px">{{ item.studyTime }}</td>
-                                    <td style="text-align: left; min-width: 90px; padding-left: 40px">
-                                        <v-icon primary small
-                                            @click="editItem(item)">mdi-file-document-edit-outline</v-icon>
-                                        <!-- <v-icon primary small @click="deleteItem(item)">mdi-delete</v-icon> -->
-                                    </td>
-                                </tr>
-                            </template>
-                        </v-data-table-server>
-                    </div>
-                </v-card>
-            </v-col>
-        </v-row>
-    </v-container>
-    <v-dialog max-width="1200px" v-model="dialog" persistent>
-        <FormDialog :item="editedSubject" :method="save" :isUpdate="isUpdate" @close-dialog="closeDialog"></FormDialog>
-    </v-dialog>
+        <AddButton
+          style="width: 300px"
+          :to-link="null"
+          :label="'เพิ่มรายวิชา'"
+          :clickFucntion="addSubject"
+        >
+        </AddButton>
+      </v-col>
+    </v-row>
+    <v-row no-gutters>
+      <v-col>
+        <v-card class="mt-4">
+          <div>
+            <v-data-table-server
+              v-model:items-per-page="pageParams.limit"
+              :headers="headers"
+              :items="subjectStore.subjects"
+              :items-length="subjectStore.totalSubjects"
+              :loading="loading"
+              item-value="id"
+              class="bg-primary"
+              @update:options="updateOptions"
+            >
+              <template v-slot:item="{ item, index }">
+                <tr :class="[{ 'even-row': index % 2 === 0, 'odd-row': index % 2 !== 0 }]">
+                  <td style="min-width: 130px">{{ item.id }}</td>
+                  <td style="min-width: 220px">{{ item.thaiName }}</td>
+                  <td style="min-width: 220px">{{ item.engName }}</td>
+                  <td style="min-width: 180px">{{ item.credit }}</td>
+                  <td style="min-width: 180px">{{ item.studyTime }}</td>
+                  <td style="text-align: left; min-width: 90px; padding-left: 40px">
+                    <v-icon primary small @click="editItem(item)"
+                      >mdi-file-document-edit-outline</v-icon
+                    >
+                    <!-- <v-icon primary small @click="deleteItem(item)">mdi-delete</v-icon> -->
+                  </td>
+                </tr>
+              </template>
+            </v-data-table-server>
+          </div>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
+  <v-dialog max-width="1200px" v-model="dialog" persistent>
+    <FormDialog
+      :item="editedSubject"
+      :method="save"
+      :isUpdate="isUpdate"
+      @close-dialog="closeDialog"
+    ></FormDialog>
+  </v-dialog>
 </template>
 <!-- <template>
     <div>{{ console.log(headers) }}</div>
@@ -416,28 +435,28 @@ const updateOptions = (options: any) => {
 </template> -->
 <style scoped>
 .details-text {
-    margin-left: 10px;
-    /* Adjust the spacing between the div and p as needed */
-    font-weight: bold;
-    font-size: large;
+  margin-left: 10px;
+  /* Adjust the spacing between the div and p as needed */
+  font-weight: bold;
+  font-size: large;
 }
 
 .even-row {
-    background-color: #f9f9f9;
-    color: black;
-    text-align: left;
+  background-color: #f9f9f9;
+  color: black;
+  text-align: left;
 }
 
 .odd-row {
-    background-color: #ffffff;
-    color: black;
-    text-align: left;
+  background-color: #ffffff;
+  color: black;
+  text-align: left;
 }
 
 /* Custom table styles */
 .custom-table td {
-    border: none;
-    /* Remove border between columns */
-    height: 55px;
+  border: none;
+  /* Remove border between columns */
+  height: 55px;
 }
 </style>
