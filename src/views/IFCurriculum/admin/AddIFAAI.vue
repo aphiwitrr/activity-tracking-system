@@ -118,7 +118,6 @@ const resetValidation = () => {
   form.value!.resetValidation()
 }
 
-
 watch(
   () => curriculumStore.currentCurriculum,
   async (newCurriculum) => {
@@ -127,7 +126,6 @@ watch(
     }
   }
 )
-
 
 //***************************************coordinator*************************************************** */
 const initialCoordinators: userIds[] = []
@@ -213,27 +211,27 @@ const getUserInfoById = (id: any) => {
 
 //*************************************** end coordinator *************************************************** */
 const plos = ref<Plos[]>([])
-async function save2() {
-  console.log(plos.value, 'from vue') // Log the data to be sent
+// async function save2() {
+//   console.log(plos.value, 'from vue') // Log the data to be sent
 
-  if (curriculumStore.editedCurriculum?.id) {
-    try {
-      // Log request URL and payload
-      console.log(
-        `Sending request to: /curriculums/${curriculumStore.editedCurriculum.id}/coordinators`
-      )
-      console.log('Payload:', coordinator.value)
+//   if (curriculumStore.editedCurriculum?.id) {
+//     try {
+//       // Log request URL and payload
+//       console.log(
+//         `Sending request to: /curriculums/${curriculumStore.editedCurriculum.id}/coordinators`
+//       )
+//       console.log('Payload:', coordinator.value)
 
-      await curriculumStore.addPlosToCurriculum(curriculumStore.editedCurriculum.id, plos.value)
-      overlay.value = !overlay.value
-      console.log('Coordinators updated successfully')
-    } catch (error) {
-      console.error('Error updating coordinators:')
-    }
-  } else {
-    console.error('Edited curriculum ID is missing')
-  }
-}
+//       await curriculumStore.addPlosToCurriculum(curriculumStore.editedCurriculum.id, plos.value)
+//       overlay.value = !overlay.value
+//       console.log('Coordinators updated successfully')
+//     } catch (error) {
+//       console.error('Error updating coordinators:')
+//     }
+//   } else {
+//     console.error('Edited curriculum ID is missing')
+//   }
+// }
 
 //*************************************** curriculums ******************************************************* */
 
@@ -449,10 +447,7 @@ const isMobile = computed(() => mdAndDown.value)
         </v-tabs-window-item>
 
         <v-tabs-window-item value="option-3">
-
           <v-container class="mt-2">
-
-
             <div style="display: flex; margin-bottom: 5vh; margin-top: 2vh">
               <div class="rounded-rectangle"></div>
               <p class="details-text" style="font-size: 2.5vh">
@@ -465,14 +460,11 @@ const isMobile = computed(() => mdAndDown.value)
               <p style="font-size: 1.5vh">รายละเอียด</p>
 
               <v-text-field
-
-            
                 v-model="form.description"
                 :rules="nameRules"
                 variant="outlined"
                 rounded="lg"
                 class="small-input"
-
               ></v-text-field>
 
               <p style="font-size: 1.5vh">ผลลัพธ์การเรียนรู้ ตามมาตรฐาน คุณวุฒิฯ</p>

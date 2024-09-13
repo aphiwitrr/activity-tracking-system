@@ -15,7 +15,7 @@ const pageParams = ref<PageParams>({
   sort: '',
   order: 'ASC',
   search: '',
-  x: '',
+  columnId: '',
   columnName: ''
 })
 

@@ -72,7 +72,7 @@ const save = async (subject: Subject) => {
   if (isUpdate.value) {
     await subjectStore.updateSubject()
   } else {
-    await subjectStore.saveSubject()
+    await subjectStore.saveSubject(pageParams.value)
   }
   isUpdate.value = false
   subjectStore.clearForm()

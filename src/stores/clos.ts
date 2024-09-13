@@ -19,7 +19,8 @@ export const useCloStore = defineStore('clo', () => {
       description: '',
       credit: 0,
       type: '',
-      studyTime: ''
+      studyTime: '',
+      descriptionEng: ''
     },
     plo: {
       id: '',

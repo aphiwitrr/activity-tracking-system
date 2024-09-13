@@ -4,7 +4,7 @@ export type PageParams = {
   sort: string
   order: 'ASC' | 'DESC'
   search: string
-  x: string
-  columnName: string
+  columnId?: string
+  columnName?: string
 }
 export type SortItem = { key: string; order?: boolean | 'asc' | 'desc' }

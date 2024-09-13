@@ -14,8 +14,8 @@ const pageParams = ref<PageParams>({
   sort: '',
   order: 'ASC',
   search: '',
-  column1: '',
-  column2: ''
+  columnId: '',
+  columnName: ''
 })
 
 const headers = computed(() => [
