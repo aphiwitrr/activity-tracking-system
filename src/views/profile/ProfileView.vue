@@ -37,7 +37,13 @@
 
 <script lang="ts" setup>
 import { useAuthStore } from '@/stores/auth'
+import type { Profile } from '@/types/Profile'
+import { onMounted, ref } from 'vue'
 
 const auth = useAuthStore()
-const profile = auth.user
+const profile = ref<Profile | null>()
+
+onMounted(async () => {
+  profile.value = await auth.fetchProfile()
+})
 </script>

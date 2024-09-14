@@ -9,6 +9,7 @@ import type { PageParams, SortItem } from '@/types/PageParams'
 import FormDialog from '@/views/subjects/SubjectFormDialog.vue'
 import SearchTextfield from '@/components/table/SearchTextfield.vue'
 import AddButton from '@/components/AddButton.vue'
+
 const subjects = computed(() => subjectStore.subjects)
 const subjectStore = useSubjectStore()
 const editedSubject = ref(Object.assign({}, subjectStore.initialSubject))

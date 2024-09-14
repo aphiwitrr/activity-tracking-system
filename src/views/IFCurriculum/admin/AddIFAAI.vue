@@ -395,7 +395,7 @@ const isMobile = computed(() => mdAndDown.value)
                 :items="userOptions"
                 variant="outlined"
                 rounded="lg"
-                :rules="[(v) => !!v || 'You must agree to continue!']"
+                :rules="[(v: any) => !!v || 'You must agree to continue!']"
               ></v-combobox>
               <!-- curriculumStore.currentCurriculum?.coordinators -->
 

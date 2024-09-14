@@ -6,7 +6,7 @@
     </p>
 
     <v-container fluid class="d-flex ma-0 pa-0 ga-4">
-      <FilterBox :fetch-search="fetchSearch" :fetch-fab="fetchFab" />
+      <FilterBox v-if="fetchSearch" :fetch-search="fetchSearch" :fetch-fab="fetchFab" />
       <v-btn
         v-if="btnAddAction"
         prepend-icon="mdi-plus"
@@ -26,7 +26,7 @@
           ) as ReadonlyArray<any>
         "
         :items="items"
-        :items-length="10"
+        :items-length="items?.length"
         @update:options="updateOptions"
       >
         <!-- <template #headers="{ columns, isSorted, getSortIcon, toggleSort }">
@@ -78,12 +78,12 @@ import FilterBox from './FilterSection.vue'
 const { t } = useLocale()
 
 const props = defineProps<{
-  pageIcon: string
+  pageIcon?: string
   pageTitle: string
   headers: HeaderItem[]
   itemsPerPage?: number
   items: Record<string, any>[]
-  fetchSearch: (value: string) => Promise<void>
+  fetchSearch?: (value: string) => Promise<void>
   fetchFab?: (value: string) => Promise<void>
   btnAddAction?: () => void
   action?: (item: any) => void

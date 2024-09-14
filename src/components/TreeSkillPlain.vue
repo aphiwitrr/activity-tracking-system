@@ -1,7 +1,7 @@
 <template>
   <v-treeview :items="items" item-value="id">
     <template #title="{ item }">
-      <p>
+      <p :class="handleCssText(item)">
         {{ item.name }}
         <span v-if="item.level && !readonly" class="text-blue px-1">
           &Delta; Level: {{ item.level }}</span
@@ -65,7 +65,7 @@
           <template #default="{ isActive }">
             <v-card maxWidth="800" class="mx-auto">
               <template #title>
-                <p>
+                <p :class="handleCssText(item)">
                   {{ item.name }}
                 </p>
                 <v-divider class="mt-2"></v-divider>
@@ -130,25 +130,17 @@
 </template>
 
 <script lang="ts" setup>
+import type { SkillNode } from '@/types/SkillNode'
 import { ref } from 'vue'
-
-interface Skill {
-  id: string
-  name: string
-  description?: string
-  level?: string
-  icon?: string
-  children?: Skill[]
-}
 
 defineProps<{
   readonly?: true
 }>()
 
-const selectedItem = ref<Skill>()
+const selectedItem = ref<SkillNode>()
 const needChildren = ref(true)
 
-const handleDisableBtn = (item: Skill | undefined | null, parentId: string) => {
+const handleDisableBtn = (item: SkillNode | undefined | null, parentId: string) => {
   if (!item) {
     return true
   }
@@ -158,17 +150,17 @@ const handleDisableBtn = (item: Skill | undefined | null, parentId: string) => {
   return false
 }
 
-const availableSkills = ref<Skill[]>([
+const availableSkills = ref<SkillNode[]>([
   { id: 'doctorDance', name: 'doctor dance' },
   { id: 'skibi', name: 'skibidi' }
 ])
 
-const items = defineModel<Skill[]>()
+const items = defineModel<SkillNode[]>()
 
 const addChild = (
   parentId: string,
-  newChild: Skill,
-  skills: Skill[],
+  newChild: SkillNode,
+  skills: SkillNode[],
   needChildren: boolean
 ): boolean => {
   for (const skill of skills) {
@@ -200,7 +192,7 @@ const addChild = (
   return false
 }
 
-const delChild = (id: string, skills: Skill[]): boolean => {
+const delChild = (id: string, skills: SkillNode[]): boolean => {
   for (let i = 0; i < skills.length; i++) {
     if (skills[i].id === id) {
       skills.splice(i, 1) // Remove the item if found
@@ -216,7 +208,7 @@ const delChild = (id: string, skills: Skill[]): boolean => {
   }
   return false
 }
-const replaceChild = (newSkill: Skill, skills: Skill[]): boolean => {
+const replaceChild = (newSkill: SkillNode, skills: SkillNode[]): boolean => {
   for (let i = 0; i < skills.length; i++) {
     if (skills[i].id === newSkill.id) {
       skills[i] = newSkill
@@ -230,5 +222,16 @@ const replaceChild = (newSkill: Skill, skills: Skill[]): boolean => {
     }
   }
   return false
+}
+
+const handleCssText = (item: SkillNode) => {
+  if (item.pass === null || undefined) {
+    return ''
+  }
+  if (item.pass) {
+    return 'text-success'
+  } else {
+    return 'text-error'
+  }
 }
 </script>

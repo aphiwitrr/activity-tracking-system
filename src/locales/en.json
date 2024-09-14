@@ -27,6 +27,9 @@
     "first name": "First Name",
     "last name": "Last Name",
     "position": "Position",
+    "skills": "Skills",
+    "scores": "Scores",
+    "help": "Help",
     "$vuetify": {
         "noDataText": "No data",
         "dataFooter": {

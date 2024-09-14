@@ -30,10 +30,10 @@ onMounted(async () => {
           v-if="isSmallScreen && auth.isAuthenticated"
           @click="() => drawer.switchDrawer()"
         />
-        <v-img src="./img/logo-buu-2_1.png" max-width="70px"></v-img>
+        <v-img src="/img/logo-buu-2_1.png" max-width="70px"></v-img>
       </div>
       <div v-else :style="{ width: '179px' }">
-        <v-img src="./img/logo-buu-2_1.png" max-width="70px"></v-img>
+        <v-img src="/img/logo-buu-2_1.png" max-width="70px"></v-img>
       </div>
     </template>
     <template #append>

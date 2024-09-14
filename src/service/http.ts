@@ -2,18 +2,18 @@ import router from '@/router'
 import axios, { AxiosError } from 'axios'
 
 const instance = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: import.meta.env.VITE_BACKEND_URL,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json'
   }
 })
 
-function delay(sec: number) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => resolve(sec), sec * 1)
-  })
-}
+// function delay(sec: number) {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => resolve(sec), sec * 1)
+//   })
+// }
 
 instance.interceptors.response.use(
   async function (res: any) {
