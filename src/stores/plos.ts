@@ -23,7 +23,8 @@ export const usePloStore = defineStore('plo', () => {
       coordinators: [],
       period: '',
       minimumGrade: 0,
-      plos: []
+      plos: [],
+      subjects: []
     }
   }
 

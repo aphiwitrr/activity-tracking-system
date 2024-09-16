@@ -21,6 +21,20 @@ export const useSkillStore = defineStore('skill', () => {
 
   const editedSkill = ref<Skill>({ ...initialSkill })
 
+  //   async function fetchSkill(id: string): Promise<Skill> {
+  //     dataInit.value = false;
+  //     const res = await skillService.getSkill(id);
+  //     editedSkill.value = res.data;
+  //     console.log(skills.value);
+  //     console.log(editedSkill.value);
+  //     dataInit.value = true;
+  //     return res.data;
+  // }
+  // async function fetchSkills() {
+  //   const res = await skillService.getSkills()
+  //   skills.value = res.data
+  // }
+
   async function fetchSkill(id: string) {
     dataInit.value = false
     const res = await skillService.getSkill(id)
@@ -36,7 +50,9 @@ export const useSkillStore = defineStore('skill', () => {
 
   async function fetchSkillsPage(params: PageParams) {
     const res = await skillService.getSkillsByPage(params)
+    console.log('call skill')
     skills.value = res.data.data
+    console.log(skills.value)
     totalSkills.value = res.data.total
   }
 

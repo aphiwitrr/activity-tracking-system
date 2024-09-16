@@ -26,6 +26,12 @@ function addCoordinator(curriculumId: string, user: { id: string }[]) {
   return http.patch(`/curriculums/${curriculumId}/coordinators`, user);
 }
 
+function addSubject(curriculumId: string, subjects: { id: string }[]) {
+  console.log(subjects, 'from service'); // For debugging
+  return http.patch(`/curriculums/${curriculumId}/subjects`, subjects);
+}
+
+
 function getCurriculumsByPage(params: PageParams) {
   return http.get<{ data: Curriculum[]; total: number }>(`/curriculums/pages`, { params })
 }
@@ -38,5 +44,6 @@ export default {
   getCurriculums,
   getCurriculum,
   addCoordinator,
-  getCurriculumsByPage
+  getCurriculumsByPage,
+  addSubject
 };

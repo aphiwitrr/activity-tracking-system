@@ -203,21 +203,21 @@ const router = createRouter({
 //   return false
 // }
 
-async function isAuthenticated() {
-  try {
-    await http.get('auth/profile')
-    return true
-  } catch (err) {
-    return false
-  }
-}
-router.beforeEach(async (to, from, next) => {
-  if (to.path !== '/forbidden' && to.meta.requireAuth) {
-    const authenticated = await isAuthenticated()
-    if (!authenticated) {
-      return next('/forbidden')
-    }
-  }
-  next()
-})
+// async function isAuthenticated() {
+//   try {
+//     await http.get('auth/profile')
+//     return true
+//   } catch (err) {
+//     return false
+//   }
+// }
+// router.beforeEach(async (to, from, next) => {
+//   if (to.path !== '/forbidden' && to.meta.requireAuth) {
+//     const authenticated = await isAuthenticated()
+//     if (!authenticated) {
+//       return next('/forbidden')
+//     }
+//   }
+//   next()
+// })
 export default router

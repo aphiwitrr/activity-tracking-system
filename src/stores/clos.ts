@@ -38,7 +38,8 @@ export const useCloStore = defineStore('clo', () => {
         period: '',
         minimumGrade: 0,
         plos: [],
-        coordinators: []
+        coordinators: [],
+        subjects: []
       }
     }
   }
