@@ -70,14 +70,14 @@ onMounted(async () => {
         </v-menu>
       </div>
       <!-- large screen -->
-      <div v-else>
-        <div v-if="!auth.isAuthenticated" class="d-flex ga-4">
+      <div>
+        <!-- <div v-if="!auth.isAuthenticated" class="d-flex ga-4">
           <LanguageBtns />
           <v-btn class="bg-buu-gold" to="/login">
             <p class="font-weight-bold">{{ t('login') }}</p>
           </v-btn>
-        </div>
-        <div v-else>
+        </div> -->
+        <div>
           <v-row no-gutters class="d-flex ga-3 align-center">
             <v-col cols="auto">
               <v-text-field
